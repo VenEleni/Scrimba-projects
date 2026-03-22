@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body>
+        <h1 id="white-part">Generate a</h1>
+        <h1 id="green-part">random password</h1>
+        <p>Never use an insecure password again.</p>
+        <label id="password-length-label" for="password-length-input">Select your password's length:</label>
+        <input id="password-length-input" type="number" min="8" max="18" value="8" onchange="setPasswordLength()" />
+        <p>Make your password stronger💪</p>
+        <div id="checkBoxes">
+        <label class="switch">Include Numbers
+            <input type="checkbox" id="numbersCheckbox" value="false" onchange="toggleNumbers()">
+       </label>
+       <label class="switch">Include Symbols
+            <input type="checkbox" id="symbolsCheckbox" value="false" onchange="toggleSymbols()">
+       </label>
+       </div>
+        <button id="button-El" onclick="generatePassword()">Generate passwords</button>
+        <span></span>
+        <div allow="clipboard-read; clipboard-write">
+            <button id="first-pass-El" onclick="clickAndCopyFirstPassword()"></button>
+            <button id="second-pass-El" onclick="clickAndCopySecondPassword()"></button>
+        </div>
+        <script src="index.js"></script>
+    </body>
+</html>
