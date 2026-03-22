@@ -12,7 +12,9 @@ let copyPassword = ""
 let includeNumbers = false;
 let includeSymbols = false;
 
-console.log(document.getElementById("numbersCheckbox").checked)
+let letters = characters.filter((character) => /^[a-zA-Z]$/.test(character));
+let lettersAndNumbers = characters.filter((numOrLetter) => /^[a-zA-Z0-9]$/.test(numOrLetter));
+let lettersAndSymbols = letters.concat(characters.filter((symbol) => !/^[a-zA-Z0-9]$/.test(symbol)));
 
 function setPasswordLength() {
     passwordLength = passwordLengthInput.value;
@@ -38,12 +40,36 @@ function generatePassword() {
     firstPassword.textContent = ""
     secondPassword.textContent = ""
     for (let i = 0; i < passwordLength * 2 ; i++) {
-        randomIndex = Math.floor(Math.random() * characters.length)
-        if (i % 2 == 0) {
-            firstPassword.textContent += characters[randomIndex];
+        if (includeNumbers && includeSymbols){
+           randomIndex = Math.floor(Math.random() * characters.length)
+            if (i % 2 == 0) {
+               firstPassword.textContent += characters[randomIndex];
+            } else {
+               secondPassword.textContent += characters[randomIndex];
+            }
+        } else if (includeNumbers){
+            randomIndex = Math.floor(Math.random() * lettersAndNumbers.length)
+            if (i % 2 == 0) {
+               firstPassword.textContent += lettersAndNumbers[randomIndex];
+            } else {
+               secondPassword.textContent += lettersAndNumbers[randomIndex];
+            }
+        } else if (includeSymbols) {
+            randomIndex = Math.floor(Math.random() * lettersAndSymbols.length)
+            if (i % 2 == 0) {
+               firstPassword.textContent += lettersAndSymbols[randomIndex];
+            } else {
+               secondPassword.textContent += lettersAndSymbols[randomIndex];
+            }
         } else {
-            secondPassword.textContent += characters[randomIndex];
+           randomIndex = Math.floor(Math.random() * letters.length)
+            if (i % 2 == 0) {
+               firstPassword.textContent += letters[randomIndex];
+            } else {
+               secondPassword.textContent += letters[randomIndex];
+            } 
         }
+       
     }
 }
 
